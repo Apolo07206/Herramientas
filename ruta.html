@@ -1,0 +1,2340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPath 2025 - Ruta de Ciberseguridad 100% Gratuita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --neon-cyan: #00d4ff;
+            --neon-purple: #bd00ff;
+            --neon-yellow: #ffd700;
+            --dark-bg: #0a0a0f;
+            --card-bg: #111118;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .glow-green { box-shadow: 0 0 20px rgba(0, 255, 65, 0.3); }
+        .glow-cyan { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+        .glow-purple { box-shadow: 0 0 20px rgba(189, 0, 255, 0.3); }
+        .glow-yellow { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+        
+        .text-glow { text-shadow: 0 0 10px currentColor; }
+        
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        .cert-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            background: linear-gradient(135deg, rgba(17, 17, 24, 0.9), rgba(17, 17, 24, 0.6));
+            backdrop-filter: blur(10px);
+        }
+        
+        .cert-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 40px rgba(0, 255, 65, 0.2);
+        }
+        
+        .cert-card.completed {
+            border-color: var(--neon-green);
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(17, 17, 24, 0.9));
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 5px; }
+        
+        .timeline-line {
+            background: linear-gradient(to bottom, var(--neon-green), var(--neon-cyan), var(--neon-purple), var(--neon-yellow));
+        }
+        
+        .timeline-dot {
+            box-shadow: 0 0 0 4px var(--dark-bg), 0 0 0 6px currentColor;
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--neon-green);
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .binary-column {
+            position: absolute;
+            top: -100%;
+            animation: rain 10s linear infinite;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--neon-green);
+        }
+        
+        @keyframes rain {
+            to { transform: translateY(200vh); }
+        }
+        
+        .cyber-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-btn:hover::before { left: 100%; }
+        
+        .level-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .level-beginner { background: rgba(0, 255, 65, 0.2); color: var(--neon-green); border: 1px solid var(--neon-green); }
+        .level-intermediate { background: rgba(0, 212, 255, 0.2); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
+        .level-advanced { background: rgba(189, 0, 255, 0.2); color: var(--neon-purple); border: 1px solid var(--neon-purple); }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        .nav-link.active {
+            color: var(--neon-green);
+            border-bottom: 2px solid var(--neon-green);
+        }
+        
+        /* Topic Cards */
+        .topic-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .topic-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--neon-green);
+            transform: translateX(5px);
+        }
+        
+        .topic-check:checked + label {
+            text-decoration: line-through;
+            color: var(--neon-green);
+        }
+        
+        .topic-check:checked + label .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Expandable Sections */
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .expandable-content.expanded {
+            max-height: 2000px;
+        }
+        
+        .expand-btn {
+            transition: transform 0.3s;
+        }
+        
+        .expand-btn.rotated {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Effects -->
+    <div class="cyber-grid"></div>
+    <div class="binary-rain" id="binaryRain"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-md border-b border-green-500/20 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shield" class="w-8 h-8 text-green-400"></i>
+                    <span class="font-mono font-bold text-xl tracking-tighter text-white">
+                        CYBER<span class="text-green-400">PATH</span>
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#inicio" class="nav-link hover:text-green-400 px-3 py-2 text-sm font-medium transition-colors">Inicio</a>
+                        <a href="#roadmap" class="nav-link hover:text-green-400 px-3 py-2 text-sm font-medium transition-colors">Roadmap</a>
+                        <a href="#temas" class="nav-link hover:text-green-400 px-3 py-2 text-sm font-medium transition-colors">Temas por Nivel</a>
+                        <a href="#certificaciones" class="nav-link hover:text-green-400 px-3 py-2 text-sm font-medium transition-colors">Certificaciones</a>
+                        <a href="#practica" class="nav-link hover:text-green-400 px-3 py-2 text-sm font-medium transition-colors">Práctica</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right hidden sm:block">
+                        <div class="text-xs text-gray-400">Progreso General</div>
+                        <div class="text-sm font-mono text-green-400" id="globalProgress">0%</div>
+                    </div>
+                    <div class="w-32 h-2 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="progress-bar" id="globalProgressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-green-900/10 to-transparent"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+            <div class="mb-6 inline-block">
+                <span class="px-4 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-mono tracking-widest">
+                    100% GRATUITO • SIN TRUCOS • 2025 EDITION
+                </span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="block text-white mb-2">Ruta de</span>
+                <span class="block glitch text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-green-400 text-glow">
+                    Ciberseguridad
+                </span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto font-mono typing-cursor" id="typingText">
+                De cero a profesional. Sin pagar un solo dólar.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="#temas" class="cyber-btn bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-lg flex items-center justify-center gap-2 glow-green">
+                    <i data-lucide="book-open"></i>
+                    Ver Temas por Nivel
+                </a>
+                <a href="#warning" class="cyber-btn border border-green-500/50 hover:bg-green-500/10 text-green-400 font-bold py-4 px-8 rounded-lg flex items-center justify-center gap-2">
+                    <i data-lucide="alert-triangle"></i>
+                    Ver Advertencias
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mt-12">
+                <div class="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                    <div class="text-3xl font-bold text-green-400 font-mono">4</div>
+                    <div class="text-xs text-gray-400 mt-1">Años</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                    <div class="text-3xl font-bold text-cyan-400 font-mono">9</div>
+                    <div class="text-xs text-gray-400 mt-1">Niveles</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                    <div class="text-3xl font-bold text-purple-400 font-mono">$0</div>
+                    <div class="text-xs text-gray-400 mt-1">Costo Total</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                    <div class="text-3xl font-bold text-yellow-400 font-mono">100%</div>
+                    <div class="text-xs text-gray-400 mt-1">Gratis Real</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Section -->
+    <section id="warning" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="warning-box rounded-lg p-6 mb-8">
+                <div class="flex items-start gap-4">
+                    <i data-lucide="alert-triangle" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-lg font-bold text-yellow-500 mb-2">Importante: Lo que NO es gratis (aunque lo parezca)</h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">•</span>
+                                <span><strong>(ISC)² CC:</strong> El curso y examen son gratis, pero el certificado físico/digital requiere <strong>$50/año</strong> de membresía. El conocimiento es 100% gratuito.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-400">•</span>
+                                <span><strong>Google/IBM/Coursera:</strong> Son de pago ($49/mes) a menos que consigas beca (no garantizado).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-400">•</span>
+                                <span><strong>Esta ruta:</strong> Solo incluye recursos 100% gratuitos sin condiciones ocultas.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Topics by Level -->
+    <section id="temas" class="py-20 px-4 bg-black/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                <span class="text-green-400">></span> Temas de Estudio por Nivel <span class="text-green-400">_</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+                Despliega cada nivel para ver los temas específicos, herramientas y metas prácticas. 
+                Marca los temas a medida que avanzas.
+            </p>
+
+            <!-- Level 0 -->
+            <div class="mb-6 border border-green-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level0')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-green-900/20 to-transparent hover:from-green-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-green-400 font-mono">NIVEL 0</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Fundamentos y Mentalidad</h3>
+                            <p class="text-sm text-gray-400">Para quienes parten desde cero • 0-6 meses</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-green-400 expand-btn" id="btn-level0"></i>
+                </button>
+                <div id="level0" class="expandable-content">
+                    <div class="p-6 border-t border-green-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-green-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="cpu" class="w-4 h-4"></i> Fundamentos de Computación
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">¿Qué es un sistema operativo?</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Memoria RAM y procesos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Sistemas de archivos</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-green-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="network" class="w-4 h-4"></i> Redes (OBLIGATORIO)
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Modelo OSI (7 capas)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">TCP vs UDP</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">DNS / DHCP</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Subnetting básico</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">NAT y direccionamiento IP</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-green-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="terminal" class="w-4 h-4"></i> Linux Básico
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Navegación: cd, ls, pwd</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Permisos: chmod, chown</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Usuarios y grupos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Servicios: systemctl</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-green-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Bash básico</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-green-900/10 border border-green-500/20 rounded-lg">
+                            <h4 class="text-green-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Montar una máquina virtual con Kali Linux o Ubuntu, navegar completamente por terminal sin usar interfaz gráfica, y entender un diagrama de red básico.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>VirtualBox, Wireshark, Kali Linux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 1 -->
+            <div class="mb-6 border border-cyan-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level1')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-cyan-900/20 to-transparent hover:from-cyan-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-cyan-400 font-mono">NIVEL 1</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Programación Base</h3>
+                            <p class="text-sm text-gray-400">Automatización y scripting • 6-12 meses</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-cyan-400 expand-btn" id="btn-level1"></i>
+                </button>
+                <div id="level1" class="expandable-content">
+                    <div class="p-6 border-t border-cyan-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-cyan-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="code" class="w-4 h-4"></i> Python para Seguridad
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Variables, tipos de datos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Bucles (for, while)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Funciones y módulos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Manejo de archivos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Requests HTTP (requests library)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Sockets básicos (socket library)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-cyan-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="terminal" class="w-4 h-4"></i> Bash Scripting
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Shebang y permisos de ejecución</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Variables y argumentos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Condicionales (if, case)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Bucles (for, while)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Pipes y redirección (> , >> , |)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-cyan-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="monitor" class="w-4 h-4"></i> PowerShell Básico
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Cmdlet básico (Get-Help, Get-Command)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Objetos y pipelines</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Variables y tipos de datos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-cyan-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Condicionales y bucles</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-cyan-900/10 border border-cyan-500/20 rounded-lg">
+                            <h4 class="text-cyan-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Escribir un script en Python que escanee puertos TCP usando sockets, automatizar una tarea repetitiva de Linux con Bash, y hacer una petición HTTP procesando la respuesta en Python.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>VS Code, Python 3, pip</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="mb-6 border border-purple-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level2')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-transparent hover:from-purple-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-purple-400 font-mono">NIVEL 2</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Introducción al Hacking Ético</h3>
+                            <p class="text-sm text-gray-400">Primeras explotaciones • Año 1</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-purple-400 expand-btn" id="btn-level2"></i>
+                </button>
+                <div id="level2" class="expandable-content">
+                    <div class="p-6 border-t border-purple-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-purple-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="search" class="w-4 h-4"></i> Metodología del Pentesting
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Fases: Reconocimiento</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Enumeración de servicios</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Explotación</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Post-explotación básica</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Reporte y documentación</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-purple-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="scan" class="w-4 h-4"></i> Escaneo y Enumeración
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Nmap: tipos de escaneo</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Enumeración de servicios comunes</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Fuzzing de directorios (Gobuster)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Enumeración web básica</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-purple-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="bug" class="w-4 h-4"></i> Explotación Básica
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Búsqueda de CVEs públicos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Uso de Metasploit básico</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Reverse shells vs Bind shells</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Stabilización de shells</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-purple-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Transferencia de archivos</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-purple-900/10 border border-purple-500/20 rounded-lg">
+                            <h4 class="text-purple-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Completar 20 máquinas fáciles en TryHackMe o Hack The Box, obtener tu primera reverse shell de forma manual (sin Metasploit), y entender la diferencia entre un exploit público y un CVE.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Nmap, Metasploit, Burp Suite Community, Gobuster, Netcat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="mb-6 border border-pink-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level3')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-pink-900/20 to-transparent hover:from-pink-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-pink-400 font-mono">NIVEL 3</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Privilege Escalation</h3>
+                            <p class="text-sm text-gray-400">De usuario a administrador • Año 2</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-pink-400 expand-btn" id="btn-level3"></i>
+                </button>
+                <div id="level3" class="expandable-content">
+                    <div class="p-6 border-t border-pink-500/20">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-pink-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="arrow-up-circle" class="w-4 h-4"></i> Linux Privilege Escalation
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">SUID/SGID mal configurados</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Cron jobs con permisos débiles</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">PATH Hijacking</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Capabilities (getcap)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Contraseñas en texto claro (config files)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Kernel exploits (básico)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-pink-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="arrow-up-circle" class="w-4 h-4"></i> Windows Privilege Escalation
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Servicios con permisos débiles</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">DLL Hijacking</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">AlwaysInstallElevated</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Token impersonation (SeImpersonatePrivilege)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Contraseñas en registro y archivos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Scheduled Tasks abuse</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-pink-900/10 border border-pink-500/20 rounded-lg">
+                            <h4 class="text-pink-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Completar 30-40 máquinas de dificultad media, escalar privilegios en al menos 10 máquinas Linux y 10 Windows, hacer privesc sin herramientas automáticas (LinPEAS/WinPEAS) al menos una vez para entender el proceso manual.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>LinPEAS, WinPEAS, PowerUp, PrivescCheck</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 4 -->
+            <div class="mb-6 border border-yellow-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level4')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-yellow-900/20 to-transparent hover:from-yellow-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-yellow-400 font-mono">NIVEL 4</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Active Directory</h3>
+                            <p class="text-sm text-gray-400">El estándar empresarial • Año 2</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-yellow-400 expand-btn" id="btn-level4"></i>
+                </button>
+                <div id="level4" class="expandable-content">
+                    <div class="p-6 border-t border-yellow-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-yellow-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="building" class="w-4 h-4"></i> Fundamentos de AD
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Estructura: Dominios, Bosques, OUs</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">GPOs (Group Policy Objects)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">LDAP y enumeración de objetos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Usuarios, grupos y permisos</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-yellow-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="key" class="w-4 h-4"></i> Protocolos y Autenticación
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Kerberos: TGT, TGS, AS-REQ/AS-REP</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">NTLM y ataques de relay</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Kerberoasting</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">AS-REP Roasting</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-yellow-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="sword" class="w-4 h-4"></i> Ataques Avanzados
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">DCSync attack</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Volcado de NTDS.dit</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">ACL Abuse: WriteDACL, GenericAll</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-yellow-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">BloodHound enumeration</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-yellow-900/10 border border-yellow-500/20 rounded-lg">
+                            <h4 class="text-yellow-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Completar 10-15 laboratorios de AD completos, obtener Domain Admin desde un usuario sin privilegios iniciales, realizar un ataque DCSync y entender qué información se extrae (hashes, historial de contraseñas).</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>BloodHound, Neo4j, Impacket, CrackMapExec, Rubeus, Mimikatz</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 5 -->
+            <div class="mb-6 border border-orange-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level5')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-orange-900/20 to-transparent hover:from-orange-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-orange-400 font-mono">NIVEL 5</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Pivoting y Movimiento Lateral</h3>
+                            <p class="text-sm text-gray-400">Expandir el acceso • Año 2-3</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-orange-400 expand-btn" id="btn-level5"></i>
+                </button>
+                <div id="level5" class="expandable-content">
+                    <div class="p-6 border-t border-orange-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-orange-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="git-branch" class="w-4 h-4"></i> Pivoting
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Conceptos de red interna vs externa</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Port Forwarding con SSH</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Proxychains y proxies SOCKS</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Chisel (túneles TCP sobre HTTP)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Ligolo-ng (pivoting moderno)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-orange-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="move" class="w-4 h-4"></i> Movimiento Lateral
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Pass The Hash (PTH)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Pass The Ticket (PTT)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Over Pass The Hash</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">PSExec, WMIexec, SMBexec</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">RDP Hijacking</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-orange-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="download" class="w-4 h-4"></i> Exfiltración de Credenciales
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">LSASS dump (Mimikatz, Procdump)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">SAM database dump</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">LLMNR/NBT-NS Poisoning (Responder)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-orange-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">SMB Relay attacks</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-orange-900/10 border border-orange-500/20 rounded-lg">
+                            <h4 class="text-orange-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Pivotar desde una red DMZ a otra interna en un laboratorio de AD, conseguir credenciales válidas con Responder en un entorno controlado, moverse lateralmente entre al menos 3 máquinas usando técnicas distintas, montar un laboratorio casero con 2 redes internas y practicar tunneling.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Chisel, Ligolo-ng, Proxychains, Responder, Impacket, CrackMapExec</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 6 -->
+            <div class="mb-6 border border-red-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level6')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-red-900/20 to-transparent hover:from-red-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-red-400 font-mono">NIVEL 6</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Persistencia y C2</h3>
+                            <p class="text-sm text-gray-400">Mantener el acceso • Año 3</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-red-400 expand-btn" id="btn-level6"></i>
+                </button>
+                <div id="level6" class="expandable-content">
+                    <div class="p-6 border-t border-red-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-red-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="linux" class="w-4 h-4"></i> Persistencia Linux
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Cron jobs maliciosos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Modificación de .bashrc/.profile</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">SSH authorized_keys backdoor</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Servicios systemd maliciosos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">SUID backdoor</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-red-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="monitor" class="w-4 h-4"></i> Persistencia Windows
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Claves de registro (Run/RunOnce)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Scheduled Tasks persistentes</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Servicios de Windows maliciosos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">WMI subscriptions</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Golden Ticket / Silver Ticket</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-red-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="radio" class="w-4 h-4"></i> Command & Control (C2)
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Conceptos de infraestructura C2</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Metasploit como C2 básico</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Sliver C2 (open source)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Havoc C2 (open source)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-red-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Comunicaciones encubiertas (DoH, HTTPS)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-red-900/10 border border-red-500/20 rounded-lg">
+                            <h4 class="text-red-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Mantener acceso persistente en una máquina comprometida más de 24 horas sin ser detectado, implementar al menos 3 mecanismos de persistencia distintos (uno en Linux, dos en Windows), montar una infraestructura C2 básica (Sliver o Havoc) y conectar un agente desde una máquina virtual.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Metasploit, Sliver, Havoc, Empire, Netcat, Ncat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 7 -->
+            <div class="mb-6 border border-indigo-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level7')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-indigo-900/20 to-transparent hover:from-indigo-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-indigo-400 font-mono">NIVEL 7</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Evasión de Defensas</h3>
+                            <p class="text-sm text-gray-400">Bypass de seguridad • Año 3</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-indigo-400 expand-btn" id="btn-level7"></i>
+                </button>
+                <div id="level7" class="expandable-content">
+                    <div class="p-6 border-t border-indigo-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-indigo-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="shield-off" class="w-4 h-4"></i> Evasión AV/EDR
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Cómo funcionan los antivirus (firmas, heurística)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">EDR: qué detectan y cómo evadirlos</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">AMSI (Antimalware Scan Interface)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">ETW (Event Tracing for Windows)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Sysmon y qué registra</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-indigo-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="code-2" class="w-4 h-4"></i> Técnicas de Evasión
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Ofuscación de payloads (Base64, XOR)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Shellcode encryption y staging</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Process Hollowing</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">DLL Sideloading</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Living Off The Land (LOLBins)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-indigo-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="globe" class="w-4 h-4"></i> Evasión de Red
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Fragmentación de paquetes</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Uso de protocolos permitidos (HTTP/S, DNS)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Evasión de WAF (encoding, bypass)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-indigo-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Túneles DNS para exfiltración</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-indigo-900/10 border border-indigo-500/20 rounded-lg">
+                            <h4 class="text-indigo-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Crear un payload que evada Windows Defender sin herramientas comerciales, bypassear AMSI de al menos 2 formas distintas, hacer exfiltración de datos usando DNS en un entorno de laboratorio, detectar qué genera Sysmon al ejecutar distintos ataques.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>MSFvenom, Veil Framework, Shellter, DefenderCheck, ThreatCheck</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 8 -->
+            <div class="mb-6 border border-pink-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level8')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-pink-900/20 to-transparent hover:from-pink-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-pink-400 font-mono">NIVEL 8</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">OSINT e Ingeniería Social</h3>
+                            <p class="text-sm text-gray-400">El factor humano • Año 3</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-pink-400 expand-btn" id="btn-level8"></i>
+                </button>
+                <div id="level8" class="expandable-content">
+                    <div class="p-6 border-t border-pink-500/20">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-pink-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="search" class="w-4 h-4"></i> OSINT (Open Source Intelligence)
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Metodología OSINT: fases y documentación</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Google Dorking avanzado</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Reconocimiento de personas (redes sociales)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Reconocimiento empresarial (subdominios, tecnologías)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Análisis de metadatos (EXIF)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Dark Web básico y búsqueda de fugas</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-pink-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="users" class="w-4 h-4"></i> Ingeniería Social
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Psicología del ataque: pretexting, autoridad, urgencia</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Phishing: diseño de campañas creíbles</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Spear phishing (ataque dirigido)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Vishing (phishing por voz)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Clonación de sitios web para captura de credenciales</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-pink-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Marco legal: qué es legal en un pentest</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-pink-900/10 border border-pink-500/20 rounded-lg">
+                            <h4 class="text-pink-400 font-bold mb-2 flex items-center gap-2">
+                                <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica
+                            </h4>
+                            <p class="text-sm text-gray-300">Hacer un informe OSINT completo de ti mismo (footprint personal), encontrar subdominios, tecnologías y empleados de una empresa pública usando solo herramientas gratuitas, montar una campaña de phishing en un laboratorio con Gophish, clonar un sitio web con SET y capturar credenciales en local.</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Maltego CE, theHarvester, Shodan, Sublist3r, ExifTool, SET, Gophish</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 9 -->
+            <div class="mb-6 border border-blue-500/20 rounded-xl overflow-hidden bg-black/40">
+                <button onclick="toggleSection('level9')" class="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-blue-900/20 to-transparent hover:from-blue-900/30 transition-all">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold text-blue-400 font-mono">NIVEL 9</span>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-white">Forense y Blue Team</h3>
+                            <p class="text-sm text-gray-400">Defensa y análisis • Año 4</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-6 h-6 text-blue-400 expand-btn" id="btn-level9"></i>
+                </button>
+                <div id="level9" class="expandable-content">
+                    <div class="p-6 border-t border-blue-500/20">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="space-y-3">
+                                <h4 class="text-blue-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="file-search" class="w-4 h-4"></i> Fundamentos Forenses
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Cadena de custodia y principios legales</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Evidencia volátil vs no volátil</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Imágenes forenses bit a bit</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Hashing para integridad (MD5, SHA-256)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Herramientas de adquisición: FTK Imager, dd</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-blue-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="hard-drive" class="w-4 h-4"></i> Análisis de Sistemas
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Sistemas de archivos: FAT32, NTFS, EXT4</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Recuperación de archivos borrados</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Logs de Windows (Event Viewer)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Logs de Linux (journalctl, syslog)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Artefactos Windows: Prefetch, LNK, MFT</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="text-blue-400 font-bold flex items-center gap-2">
+                                    <i data-lucide="activity" class="w-4 h-4"></i> Memoria y Red
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Volcado de memoria RAM (WinPmem, LiME)</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Análisis con Volatility 3</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Análisis de tráfico con Wireshark</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Reconstrucción de sesiones desde PCAPs</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-3 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Análisis básico de malware (PEStudio, Ghidra)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 grid md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-blue-900/10 border border-blue-500/20 rounded-lg">
+                                <h4 class="text-blue-400 font-bold mb-2 flex items-center gap-2">
+                                    <i data-lucide="target" class="w-4 h-4"></i> Meta Práctica Forense
+                                </h4>
+                                <p class="text-sm text-gray-300">Crear una imagen forense de un disco y analizarla con Autopsy, analizar un volcado de memoria con Volatility y encontrar un proceso malicioso, reconstruir una sesión HTTP desde un archivo .pcap, analizar un malware conocido con PEStudio y documentar los hallazgos.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-blue-900/10 border border-blue-500/20 rounded-lg">
+                                <h4 class="text-blue-400 font-bold mb-2 flex items-center gap-2">
+                                    <i data-lucide="shield" class="w-4 h-4"></i> Respuesta a Incidentes (IR)
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="topic-card flex items-center gap-3 p-2 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Fases del IR: Preparación, Identificación, Contención</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-2 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Frameworks: NIST SP 800-61, MITRE ATT&CK</span>
+                                    </label>
+                                    <label class="topic-card flex items-center gap-3 p-2 rounded-lg cursor-pointer">
+                                        <input type="checkbox" class="topic-check hidden" onchange="updateTopicProgress()">
+                                        <span class="check-icon opacity-0 transform scale-50 transition-all text-blue-400">
+                                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-300">Creación de playbooks de respuesta</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-4 text-sm flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Autopsy, FTK Imager, Volatility 3, Wireshark, NetworkMiner, PEStudio, Ghidra, Splunk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Certifications Grid -->
+    <section id="certificaciones" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 text-white">
+                <span class="text-green-400">></span> Certificaciones <span class="text-green-400">_</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+                Haz clic en cualquier certificación para abrir el enlace oficial. 
+                Marca como completada para hacer seguimiento de tu progreso.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="certGrid">
+                <!-- Cert cards injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Platforms -->
+    <section id="practica" class="py-20 px-4 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">
+                <span class="text-cyan-400">></span> Plataformas de Práctica <span class="text-cyan-400">_</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="https://tryhackme.com" target="_blank" class="group relative bg-gradient-to-br from-green-900/20 to-black border border-green-500/30 rounded-xl p-6 hover:border-green-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-beginner">Gratis</span></div>
+                    <i data-lucide="target" class="w-12 h-12 text-green-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">TryHackMe</h3>
+                    <p class="text-sm text-gray-400 mb-4">Labs guiados desde principiante hasta avanzado.</p>
+                    <div class="flex items-center text-green-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://www.hackthebox.com" target="_blank" class="group relative bg-gradient-to-br from-cyan-900/20 to-black border border-cyan-500/30 rounded-xl p-6 hover:border-cyan-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-intermediate">Freemium</span></div>
+                    <i data-lucide="box" class="w-12 h-12 text-cyan-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Hack The Box</h3>
+                    <p class="text-sm text-gray-400 mb-4">Máquinas reales de producción. El estándar de la industria.</p>
+                    <div class="flex items-center text-cyan-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://picoctf.org" target="_blank" class="group relative bg-gradient-to-br from-purple-900/20 to-black border border-purple-500/30 rounded-xl p-6 hover:border-purple-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-beginner">100% Free</span></div>
+                    <i data-lucide="flag" class="w-12 h-12 text-purple-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">PicoCTF</h3>
+                    <p class="text-sm text-gray-400 mb-4">CTFs por Carnegie Mellon. Ideal para empezar desde cero.</p>
+                    <div class="flex items-center text-purple-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://cyberdefenders.org" target="_blank" class="group relative bg-gradient-to-br from-blue-900/20 to-black border border-blue-500/30 rounded-xl p-6 hover:border-blue-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-intermediate">Blue Team</span></div>
+                    <i data-lucide="shield-check" class="w-12 h-12 text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">CyberDefenders</h3>
+                    <p class="text-sm text-gray-400 mb-4">Labs de forense, análisis de malware y Blue Team.</p>
+                    <div class="flex items-center text-blue-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://portswigger.net/web-security" target="_blank" class="group relative bg-gradient-to-br from-orange-900/20 to-black border border-orange-500/30 rounded-xl p-6 hover:border-orange-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-advanced">Web</span></div>
+                    <i data-lucide="globe" class="w-12 h-12 text-orange-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">PortSwigger Academy</h3>
+                    <p class="text-sm text-gray-400 mb-4">La mejor formación mundial en seguridad web.</p>
+                    <div class="flex items-center text-orange-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://overthewire.org/wargames/" target="_blank" class="group relative bg-gradient-to-br from-gray-800 to-black border border-gray-600/30 rounded-xl p-6 hover:border-gray-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-beginner">Linux</span></div>
+                    <i data-lucide="terminal" class="w-12 h-12 text-gray-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">OverTheWire</h3>
+                    <p class="text-sm text-gray-400 mb-4">Wargames para aprender Linux y seguridad desde la terminal.</p>
+                    <div class="flex items-center text-gray-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://www.vulnhub.com" target="_blank" class="group relative bg-gradient-to-br from-red-900/20 to-black border border-red-500/30 rounded-xl p-6 hover:border-red-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-intermediate">VMs</span></div>
+                    <i data-lucide="download" class="w-12 h-12 text-red-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">VulnHub</h3>
+                    <p class="text-sm text-gray-400 mb-4">Máquinas vulnerables para descargar y practicar localmente.</p>
+                    <div class="flex items-center text-red-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+
+                <a href="https://blueteamlabs.online" target="_blank" class="group relative bg-gradient-to-br from-indigo-900/20 to-black border border-indigo-500/30 rounded-xl p-6 hover:border-indigo-400 transition-all hover:transform hover:scale-105">
+                    <div class="absolute top-4 right-4"><span class="level-badge level-advanced">DFIR</span></div>
+                    <i data-lucide="search" class="w-12 h-12 text-indigo-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">BTLO</h3>
+                    <p class="text-sm text-gray-400 mb-4">Blue Team Labs Online. Análisis forense y respuesta a incidentes.</p>
+                    <div class="flex items-center text-indigo-400 text-sm font-mono group-hover:underline">Acceder <i data-lucide="external-link" class="w-4 h-4 ml-1"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-green-500/20 py-12 px-4 bg-black">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <i data-lucide="shield" class="w-6 h-6 text-green-400"></i>
+                <span class="font-mono font-bold text-lg text-white">CYBER<span class="text-green-400">PATH</span></span>
+            </div>
+            <p class="text-gray-500 text-sm mb-6">
+                Ruta creada para la comunidad hispanohablante. 100% gratuita, sin atajos, sin pagos ocultos.
+            </p>
+            <div class="flex justify-center gap-6 text-sm text-gray-400">
+                <span class="flex items-center gap-1"><i data-lucide="github" class="w-4 h-4"></i> Open Source</span>
+                <span class="flex items-center gap-1"><i data-lucide="heart" class="w-4 h-4 text-red-500"></i> Sin fines de lucro</span>
+                <span class="flex items-center gap-1"><i data-lucide="lock" class="w-4 h-4"></i> Sin trackers</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Certification Data
+        const certifications = [
+            {
+                id: 'cisco-net',
+                name: 'Cisco Networking Basics',
+                provider: 'Cisco NetAcad',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Fundamentos de redes, TCP/IP, subnetting. Base esencial para todo lo demás.',
+                link: 'https://www.netacad.com/courses/networking-basics',
+                year: 1
+            },
+            {
+                id: 'cisco-cyber',
+                name: 'Introduction to Cybersecurity',
+                provider: 'Cisco NetAcad',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Introducción a amenazas, defensa y carreras en ciberseguridad.',
+                link: 'https://www.netacad.com/courses/introduction-to-cybersecurity',
+                year: 1
+            },
+            {
+                id: 'fortinet-nse1',
+                name: 'NSE 1: Threat Landscape',
+                provider: 'Fortinet',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Conocimiento fundamental sobre el panorama de amenazas actual.',
+                link: 'https://training.fortinet.com/',
+                year: 1
+            },
+            {
+                id: 'fortinet-nse2',
+                name: 'NSE 2: Evolution of Cybersecurity',
+                provider: 'Fortinet',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Evolución histórica de la ciberseguridad y conceptos clave.',
+                link: 'https://training.fortinet.com/',
+                year: 1
+            },
+            {
+                id: 'fortinet-nse3',
+                name: 'NSE 3: Fortinet Solutions',
+                provider: 'Fortinet',
+                level: 'intermediate',
+                cost: 'Gratis',
+                description: 'Visión general de soluciones de seguridad de Fortinet.',
+                link: 'https://training.fortinet.com/',
+                year: 2
+            },
+            {
+                id: 'isc2-cc',
+                name: '(ISC)² Certified in Cybersecurity (CC)',
+                provider: 'ISC2',
+                level: 'beginner',
+                cost: 'Gratis*',
+                description: 'Certificación entry-level más reconocida. *Requiere $50/año para certificado físico.',
+                link: 'https://www.isc2.org/landing/1mcc',
+                year: 2,
+                warning: true
+            },
+            {
+                id: 'thm-pre',
+                name: 'TryHackMe Pre-Security Path',
+                provider: 'TryHackMe',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Ruta guiada: redes, Linux, Windows, fundamentos web.',
+                link: 'https://tryhackme.com/path/outline/presecurity',
+                year: 1
+            },
+            {
+                id: 'thm-complete',
+                name: 'TryHackMe Complete Beginner',
+                provider: 'TryHackMe',
+                level: 'beginner',
+                cost: 'Gratis',
+                description: 'Primeros pasos en hacking ético, herramientas básicas.',
+                link: 'https://tryhackme.com/path/outline/beginner',
+                year: 1
+            },
+            {
+                id: 'portswigger',
+                name: 'Web Security Academy',
+                provider: 'PortSwigger',
+                level: 'intermediate',
+                cost: 'Gratis',
+                description: 'La mejor formación mundial en seguridad web. Labs interactivos.',
+                link: 'https://portswigger.net/web-security',
+                year: 3
+            },
+            {
+                id: 'splunk-fund',
+                name: 'Splunk Fundamentals 1',
+                provider: 'Splunk',
+                level: 'intermediate',
+                cost: 'Gratis',
+                description: 'Uso de Splunk para análisis de logs y seguridad. Esencial para SOC.',
+                link: 'https://www.splunk.com/en_us/training.html',
+                year: 4
+            },
+            {
+                id: 'microsoft-sc900',
+                name: 'Microsoft SC-900',
+                provider: 'Microsoft Learn',
+                level: 'beginner',
+                cost: 'Curso Gratis',
+                description: 'Fundamentos de seguridad, cumplimiento e identidad en Azure.',
+                link: 'https://learn.microsoft.com/en-us/certifications/security-compliance-and-identity-fundamentals/',
+                year: 1
+            },
+            {
+                id: 'cyberdefenders',
+                name: 'CyberDefenders CCD',
+                provider: 'CyberDefenders',
+                level: 'intermediate',
+                cost: 'Gratis',
+                description: 'Certificación práctica en Blue Team, forense y análisis de malware.',
+                link: 'https://cyberdefenders.org/',
+                year: 4
+            }
+        ];
+
+        // Render Certifications
+        function renderCerts() {
+            const grid = document.getElementById('certGrid');
+            const saved = JSON.parse(localStorage.getItem('cyberpath_certs') || '[]');
+            
+            grid.innerHTML = certifications.map(cert => {
+                const isCompleted = saved.includes(cert.id);
+                const levelClass = `level-${cert.level}`;
+                const warningBadge = cert.warning ? '<span class="absolute top-2 right-2 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded border border-yellow-500/30">*Ver costo</span>' : '';
+                
+                return `
+                    <div class="cert-card rounded-xl p-6 relative ${isCompleted ? 'completed' : ''}" data-id="${cert.id}">
+                        ${warningBadge}
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="level-badge ${levelClass}">${cert.level}</span>
+                            <span class="text-xs font-mono ${cert.cost === 'Gratis' ? 'text-green-400' : 'text-yellow-400'}">${cert.cost}</span>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-white mb-1">${cert.name}</h3>
+                        <p class="text-sm text-gray-400 mb-3">${cert.provider}</p>
+                        <p class="text-sm text-gray-300 mb-4 line-clamp-2">${cert.description}</p>
+                        
+                        <div class="flex gap-2 mt-auto">
+                            <a href="${cert.link}" target="_blank" class="flex-1 cyber-btn bg-green-600 hover:bg-green-500 text-white text-sm font-bold py-2 px-4 rounded text-center flex items-center justify-center gap-1">
+                                Ir al curso <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                            <button onclick="toggleCert('${cert.id}')" class="cyber-btn ${isCompleted ? 'bg-green-500/20 text-green-400 border border-green-500' : 'bg-gray-700 hover:bg-gray-600 text-gray-300'} py-2 px-3 rounded" title="${isCompleted ? 'Marcar como pendiente' : 'Marcar como completada'}">
+                                <i data-lucide="${isCompleted ? 'check-circle' : 'circle'}" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            lucide.createIcons();
+            updateProgress();
+        }
+
+        // Toggle Certification Status
+        function toggleCert(id) {
+            let saved = JSON.parse(localStorage.getItem('cyberpath_certs') || '[]');
+            
+            if (saved.includes(id)) {
+                saved = saved.filter(certId => certId !== id);
+            } else {
+                saved.push(id);
+            }
+            
+            localStorage.setItem('cyberpath_certs', JSON.stringify(saved));
+            renderCerts();
+        }
+
+        // Toggle Section Expand/Collapse
+        function toggleSection(id) {
+            const content = document.getElementById(id);
+            const btn = document.getElementById('btn-' + id);
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                btn.classList.remove('rotated');
+            } else {
+                // Close others
+                document.querySelectorAll('.expandable-content').forEach(el => el.classList.remove('expanded'));
+                document.querySelectorAll('.expand-btn').forEach(el => el.classList.remove('rotated'));
+                
+                content.classList.add('expanded');
+                btn.classList.add('rotated');
+            }
+        }
+
+        // Update Topic Progress
+        function updateTopicProgress() {
+            const checkboxes = document.querySelectorAll('.topic-check');
+            const checked = document.querySelectorAll('.topic-check:checked');
+            const percentage = Math.round((checked.length / checkboxes.length) * 100);
+            
+            document.getElementById('globalProgress').textContent = `${percentage}%`;
+            document.getElementById('globalProgressBar').style.width = `${percentage}%`;
+            
+            // Save to localStorage
+            const checkedIds = Array.from(checked).map(cb => cb.id || Math.random().toString(36).substr(2, 9));
+            localStorage.setItem('cyberpath_topics', JSON.stringify(checkedIds));
+        }
+
+        // Update Global Progress
+        function updateProgress() {
+            const savedCerts = JSON.parse(localStorage.getItem('cyberpath_certs') || '[]');
+            const certProgress = (savedCerts.length / certifications.length) * 100;
+            
+            // Also count topics
+            const topicCheckboxes = document.querySelectorAll('.topic-check');
+            const checkedTopics = document.querySelectorAll('.topic-check:checked');
+            const topicProgress = topicCheckboxes.length > 0 ? (checkedTopics.length / topicCheckboxes.length) * 100 : 0;
+            
+            const totalProgress = Math.round((certProgress + topicProgress) / 2);
+            
+            document.getElementById('globalProgress').textContent = `${totalProgress}%`;
+            document.getElementById('globalProgressBar').style.width = `${totalProgress}%`;
+        }
+
+        // Binary Rain Effect
+        function createBinaryRain() {
+            const container = document.getElementById('binaryRain');
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'binary-column';
+                column.style.left = `${i * 20}px`;
+                column.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                
+                let binary = '';
+                for (let j = 0; j < 50; j++) {
+                    binary += Math.random() > 0.5 ? '1' : '0';
+                    binary += '<br>';
+                }
+                column.innerHTML = binary;
+                container.appendChild(column);
+            }
+        }
+
+        // Typing Effect
+        function typeWriter() {
+            const text = "De cero a profesional. Sin pagar un solo dólar.";
+            const element = document.getElementById('typingText');
+            element.textContent = '';
+            element.classList.add('typing-cursor');
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        element.classList.remove('typing-cursor');
+                    }, 1000);
+                }
+            }, 50);
+        }
+
+        // Navigation Active State
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCerts();
+            createBinaryRain();
+            typeWriter();
+            
+            // Restore topic checkboxes
+            const savedTopics = JSON.parse(localStorage.getItem('cyberpath_topics') || '[]');
+            document.querySelectorAll('.topic-check').forEach((cb, index) => {
+                cb.id = cb.id || `topic-${index}`;
+                if (savedTopics.includes(cb.id)) {
+                    cb.checked = true;
+                }
+            });
+            updateTopicProgress();
+            
+            window.addEventListener('scroll', updateActiveNav);
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+            
+            // Expand first section by default
+            toggleSection('level0');
+        });
+    </script>
+</body>
+</html>
