@@ -276,7 +276,7 @@ def interactive_mode():
     base_words.extend(get_common_spanish_words())
     
     # Caracteres especiales
-    special_chars = ['!', '@', '#', '$', '%', '&', '*', '?', '¡', '¿', '+', '-', '_', '.', '']
+    special_chars = ['!', '@', '#', '$', '%', '&', '*', '?', '¡', '¿', '+', '-', '_', '.']
     if not usar_especiales:
         special_chars = []
     

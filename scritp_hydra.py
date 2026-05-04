@@ -256,7 +256,7 @@ if servicio in ["ssh", "ftp", "telnet", "smtp", "pop3", "imap", "rdp"]:
         ataque_normal_contra()
 
 elif servicio == "http-get":
-    ataque_http_post()
+    ataque_http_get()
 
 elif servicio == "http-post":
     ataque_http_post()

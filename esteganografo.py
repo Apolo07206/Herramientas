@@ -347,6 +347,7 @@ class UniversalSteganographyTool:
                 'compressed': self.compress_var.get(),
                 'encrypted': self.encrypt_var.get(),
                 'stealth': self.stealth_var.get(),
+                'padding_size': padding_size,
                 'original_hash': original_hash,
                 'carrier_type': os.path.splitext(self.carrier_path.get())[1],
                 'version': '2.0'
@@ -479,9 +480,7 @@ class UniversalSteganographyTool:
             
             # Remover padding si modo sigiloso
             if metadata.get('stealth', False):
-                # El padding está al inicio, necesitamos el tamaño exacto
-                # Por simplicidad, usaremos los primeros bytes para determinar el tamaño del padding
-                padding_size = payload_data[0] + (payload_data[1] << 8)
+                padding_size = metadata.get('padding_size', 0)
                 if padding_size > 0 and padding_size < len(payload_data):
                     payload_data = payload_data[padding_size:]
                     self.log_message(self.extract_log, f"   👻 Removido padding de {padding_size} bytes")

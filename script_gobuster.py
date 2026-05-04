@@ -109,6 +109,10 @@ def run_gobuster(url, wordlist, extensions=None, threads=50):
     
     print(f"{C.D}    Comando: {' '.join(cmd)}{C.E}\n")
     
+    proceso = None
+    found_count = 0
+    status_counts = defaultdict(int)
+    
     try:
         # Ejecutar proceso
         proceso = sp.Popen(

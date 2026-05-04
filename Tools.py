@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 import os
+import sys
 import time
 
 # Colores ANSI
@@ -61,17 +62,20 @@ def mostrar_menu():
 def main():
     """Función principal"""
     
-    # Diccionario con los NOMBRES DE ARCHIVO de cada herramienta
+    # Directorio base del script
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    
+    # Diccionario con los NOMBRES DE ARCHIVO de cada herramienta (rutas absolutas)
     herramientas = {
-        '1': 'script_nmap.py',
-        '2': 'script_gobuster.py',
-        '3': 'script_sqlmap.py',
-        '4': 'script_John.py',
-        '5': 'scritp_hydra.py',
-        '6': 'script_MSFvenom.py',
-        '7': 'spoofer.py',
-        '8': 'WFUZZ.py',
-        '9': 'aircrak-ng.py',
+        '1': os.path.join(SCRIPT_DIR, 'script_nmap.py'),
+        '2': os.path.join(SCRIPT_DIR, 'script_gobuster.py'),
+        '3': os.path.join(SCRIPT_DIR, 'script_sqlmap.py'),
+        '4': os.path.join(SCRIPT_DIR, 'script_John.py'),
+        '5': os.path.join(SCRIPT_DIR, 'scritp_hydra.py'),
+        '6': os.path.join(SCRIPT_DIR, 'script_MSFvenom.py'),
+        '7': os.path.join(SCRIPT_DIR, 'spoofer.py'),
+        '8': os.path.join(SCRIPT_DIR, 'WFUZZ.py'),
+        '9': os.path.join(SCRIPT_DIR, 'aircrak-ng.py'),
     }
     
     nombres_herramientas = {
@@ -80,7 +84,7 @@ def main():
         '3': 'SQLmap',
         '4': 'John The Ripper',
         '5': 'Hydra',
-        '6': 'MSVvenom',
+        '6': 'MSFvenom',
         '7': 'Spoofing',
         '8': 'Wfuzz',
         '9': 'hack-wifi',
